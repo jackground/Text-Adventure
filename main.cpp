@@ -6,6 +6,7 @@
  *  Due Date     : 4/21/19
  ******************************************************************************/
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 /*******************************************************************************
  *
@@ -56,8 +57,9 @@ void outputUpdate (string playerName,
                    int oranges);
 
 void pickDoor (char& door);
+
 void matchDoor (char& door,
-                bool& alignment,
+                bool alignment,
                 int& bananas,
                 int& oranges,
                 string monsterName,
@@ -66,6 +68,7 @@ void matchDoor (char& door,
 
 int main()
 {
+    // Seed Random
     srand(500);
 
     // Variables
@@ -247,7 +250,7 @@ void pickDoor (char& door)
 }
 
 void matchDoor (char& door,
-                bool& alignment,
+                bool alignment,
                 int& bananas,
                 int& oranges,
                 string monsterName,

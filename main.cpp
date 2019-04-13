@@ -134,8 +134,6 @@ bool exitRoom(int bananas,          //
     return 0;
 }
 
-//You must write a function for each door. When the player chooses a door in a certain direction (N/E/S/W) -- and only one of those values -- the program should call the function for the door in that direction or end the program if she chooses the door to the exit. Some of these functions will use reference variables for all or some of their parameters.
-
 void doorN(bool alignment,          //
            int& bananas,            //
            int& oranges,            //

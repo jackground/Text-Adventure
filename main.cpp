@@ -17,8 +17,15 @@ using namespace std;
  *  will travel from room to room choosing which door to traverse through.
  * _____________________________________________________________________________
  * INPUT:
+ *   playerName : player's name input by user
+ *   monsterName: monster's name input by user
+ *   door       : door player enters input by user
  *
  * OUTPUT:
+ *   bananas    : number of bananas player has
+ *   oranges    : number of oranges player has
+ *   playerName : player's name input by user
+ *   monsterName: monster's name input by user
  *
  ******************************************************************************/
 /*******************************************************************************
@@ -126,6 +133,11 @@ bool doorW(bool alignment,              // IN - two possible alignments of four
 
 /*******************************************************************************
  * outputUpdate
+ *   This function receives a string (playerName) and two integers (bananas and
+ *   oranges). It outputs an update with the player name, location, and the
+ *   number of bananas and oranges they have - returns nothing → This will
+ *   output an update with the player name, location, and the number of bananas
+ *   and oranges they have.
  *
  ******************************************************************************/
 void outputUpdate (string playerName,   // IN - player's name input by user
@@ -134,12 +146,21 @@ void outputUpdate (string playerName,   // IN - player's name input by user
 
 /*******************************************************************************
  * pickDoor
+ *   This function receives a character (door) passed by reference. It uses an
+ *   input validation loop to output a prompt for the user to choose a door, and
+ *   it will validate the input - returns nothing → This will output a prompt
+ *   for the user to choose a door.
  *
  ******************************************************************************/
 void pickDoor (char& door);             // IN - door player enters input by user
 
 /*******************************************************************************
  * matchDoor
+ *   This function receives a character variable (door), a boolean variable
+ *   (alignment), two integer variables passed by reference (bananas and
+ *   oranges, respectively), a string variable (monsterName) and a boolean
+ *   variable passedd by reference (go). This function matches the door variable
+ *   with the correct door function and calls that function - returns nothing.
  *
  ******************************************************************************/
 void matchDoor (char& door,             // IN - door player enters input by user
@@ -192,10 +213,19 @@ int main()
     //     is set to 0 when user exits.
     do
     {
+        // outputUpdate - Will output an update with the player's name,
+        //                location, and the number of bananas and oranges they
+        //                have
         outputUpdate(playerName, bananas, oranges);
+
+        // Randomly setting alignment
         alignment = rand() % 2;
-        cout << alignment << endl;
+
+        // pickDoor - Will prompt for the user to choose a door, and it will
+        //            validate the input
         pickDoor(door);
+
+        // matchDoor - Will call the matching function of the door chosen
         matchDoor(door, alignment, bananas, oranges, monsterName, go);
 
     } while (go != 0);
@@ -495,10 +525,10 @@ bool doorS(bool alignment,          // IN - two possible alignments of four
  *______________________________________________________________________________
  * PRE-CONDITIONS
  *   The following need previously defined values:
- *     alignment  : two possible alignments of four doors decided randomly at
+ *     alignment: two possible alignments of four doors decided randomly at
  *                  beginning of each turn
- *     bananas    : number of bananas the player has
- *     oranges    : number of oranges the player has
+ *     bananas  : number of bananas the player has
+ *     oranges  : number of oranges the player has
  * POST-CONDITIONS
  *     This function will return a boolean.
  *      bananas: number of bananas the player has
@@ -531,12 +561,19 @@ bool doorW(bool alignment,          // IN - two possible alignments of four
  *
  * FUNCTION outputUpdate
  *______________________________________________________________________________
- * This function
+ * This function receives a string (playerName) and two integers (bananas and
+ *   oranges). It outputs an update with the player name, location, and the
+ *   number of bananas and oranges they have - returns nothing.
  *______________________________________________________________________________
  * PRE-CONDITIONS
+ *   The following need previously defined values:
+ *     playerName: player's name input by user
+ *     bananas   : number of bananas the player has
+ *     oranges   : number of oranges the player has
  *
  * POST-CONDITIONS
- *
+ *     This function will output an update with the player name, location, and
+ *       the number of bananas and oranges they have.
  ******************************************************************************/
 void outputUpdate (string playerName,   // IN - player's name input by user
                    int bananas,         // IN - number of bananas the player has
@@ -552,12 +589,17 @@ void outputUpdate (string playerName,   // IN - player's name input by user
  *
  * FUNCTION pickDoor
  *______________________________________________________________________________
- * This function
+ * This function receives a character (door) passed by reference. It uses an
+ *   input validation loop to output a prompt for the user to choose a door,
+ *   and it will validate the input - returns nothing.
  *______________________________________________________________________________
  * PRE-CONDITIONS
+ *   The following needs a previously defined value passed by reference:
+ *     door: door player enters input by user
  *
  * POST-CONDITIONS
- *
+ *    This function will output a prompt for the user to choose a door.
+ *      door: door player enters input by user
  ******************************************************************************/
 void pickDoor (char& door)  // IN - door player enters input by user
 {
@@ -575,12 +617,31 @@ void pickDoor (char& door)  // IN - door player enters input by user
  *
  * FUNCTION matchDoor
  *______________________________________________________________________________
- * This function
+ * This function receives a character variable (door), a boolean variable
+ *   (alignment), two integer variables passed by reference (bananas and
+ *   oranges, respectively), a string variable (monsterName) and a boolean
+ *   variable passedd by reference (go). This function matches the door variable
+ *   with the correct door function and calls that function - returns nothing.
  *______________________________________________________________________________
  * PRE-CONDITIONS
+ *   The following need previously defined values:
+ *    door       : door player enters input by user
+ *    alignment  : two possible alignments of four doors decided randomly at the
+ *                 beginning of each turn
+ *    bananas    : number of bananas the player has
+ *    oranges    : number of oranges the player has
+ *    monsterName: monster's name input by user
+ *    go         : value set at the end of every round to determind when to stop
+ *                 the game
+ *
  *
  * POST-CONDITIONS
- *
+ *    This function will call another function.
+ *      door   : door player enters input by user
+ *      bananas: number of bananas the player has
+ *      oranges: number of oranges the player has
+ *      go     : value set at the end of every round to determind when to stop
+ *               the game
  ******************************************************************************/
 void matchDoor (char& door,         // IN - door player enters input by user
                 bool alignment,     // IN - two possible alignments of four
@@ -617,6 +678,3 @@ void matchDoor (char& door,         // IN - door player enters input by user
         go = doorW(alignment, bananas, oranges);
     }
 }
-
-
-

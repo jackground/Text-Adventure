@@ -29,6 +29,18 @@ using namespace std;
  *
  ******************************************************************************/
 /*******************************************************************************
+ * getNames
+ *   This function receives two string variables passed by reference (playerName
+ *   and monsterName). The function first prompts the user to enter their name
+ *   and sets the input to playerName. Then it prompts the user to enter the
+ *   name of their scariest monster and sets the input to monsterName - returns
+ *   nothing → This will output two prompts, first for the user to enter their
+ *   name and then for the user to enter the name of their scariest monster.
+ ******************************************************************************/
+void getNames(string& playerName,       // IN - player's name input by user
+              string& monsterName);     // IN - monster's name input by user
+
+/*******************************************************************************
  * monsterRoom
  *   This function receives two integer variables (bananas and oranges, by
  *   reference and a string variable, monsterName by value. It reduces the
@@ -172,9 +184,6 @@ void matchDoor (char& door,             // IN - door player enters input by user
                 string monsterName,     // IN - monster's name input by user
                 bool& go);              // IN - value set at the end of every
                                         //      round to determine when to stop
-                                        //      the game
-
-
 int main()
 {
     // Seed random with 500 for consistent testing results
@@ -195,18 +204,14 @@ int main()
                             //     determine when to stop the game
 
     // Variable Initialization
+    // Player begins with 5 bananas and 3 oranges
     bananas = 5;
     oranges = 3;
-    go = 1;
 
-    // INPUT - user prompted to input name then name of scariest monster
-    cout << "Please enter your name: ";
-    cin >> playerName;
-    cout << endl;
-
-    cout << "Name your scariest monster: ";
-    cin >> monsterName;
-    cout << endl;
+    // INPUT - user prompted to input name and monster's name
+    // getNames - Will prompt the user input name and monster's name and will
+    //            set input to playerName and monsterName, respectively.
+    getNames(playerName, monsterName);
 
     // PROC - output update, setting alignment, prompting user to pick door and
     //     matching door to room based on alignment. Process repeated until go
@@ -228,10 +233,41 @@ int main()
         // matchDoor - Will call the matching function of the door chosen
         matchDoor(door, alignment, bananas, oranges, monsterName, go);
 
-    } while (go != 0);
+    } while (go == 1);
 
     return 0;
 }
+/*******************************************************************************
+ *
+ * FUNCTION getNames
+ *______________________________________________________________________________
+ * This function receives two string variables passed by reference (playerName
+ *   and monsterName). The function first prompts the user to enter their name
+ *   and sets the input to playerName. Then it prompts the user to enter the
+ *   name of their scariest monster and sets the input to monsterName - returns
+ *   nothing.
+ *______________________________________________________________________________
+ * PRE-CONDITIONS
+ *   There are no pre-conditions for this function.
+ *
+ * POST-CONDITIONS
+ *     This function will output prompts for the player's and monster's names.
+ *      playerName : player's name input by user
+ *      monsterName: monster's name input by user
+ ******************************************************************************/
+void getNames(string& playerName,       // IN - player's name input by user
+              string& monsterName)      // IN - monster's name input by user
+{
+    // INPUT - User prompted to input name and monster's name
+    cout << "Please enter your name: ";
+    cin >> playerName;
+    cout << endl;
+
+    cout << "Name your scariest monster: ";
+    cin >> monsterName;
+    cout << endl;
+}
+
 /*******************************************************************************
  *
  * FUNCTION monsterRoom
@@ -371,8 +407,8 @@ void pictureRoom()
  *     This function will output a message notifying the player they have found
  *       the exit and then outputs the player's combined and individual scores.
  ******************************************************************************/
-void exitRoom(int bananas,          // IN - number of bananas the player has
-              int oranges)          // IN - number of oranges the player has
+void exitRoom(int bananas,              // IN - number of bananas the player has
+              int oranges)              // IN - number of oranges the player has
 {
     // OUTPUT - This function will output a message notifying the player they
     //          have found the exit and then outputs the player's combined and
@@ -404,12 +440,12 @@ void exitRoom(int bananas,          // IN - number of bananas the player has
  *      bananas: number of bananas the player has
  *      oranges: number of oranges the player has
  ******************************************************************************/
-bool doorN(bool alignment,          // IN - two possible alignments of four
-                                    //      doors decided randomly at beginning
-                                    //      of each turn
-           int& bananas,            // IN - number of bananas the player has
-           int& oranges,            // IN - number of oranges the player has
-           string monsterName)      // IN - monster's name input by user
+bool doorN(bool alignment,              // IN - two possible alignments of four
+                                        //      doors decided randomly at
+                                        //      beginning of each turn
+           int& bananas,                // IN - number of bananas the player has
+           int& oranges,                // IN - number of oranges the player has
+           string monsterName)          // IN - monster's name input by user
 {
     if (alignment == 0)
     {
@@ -449,12 +485,12 @@ bool doorN(bool alignment,          // IN - two possible alignments of four
  *      bananas: number of bananas the player has
  *      oranges: number of oranges the player has
  ******************************************************************************/
-bool doorE(bool alignment,          // IN - two possible alignments of four
-                                    //      doors decided randomly at beginning
-                                    //      of each turn
-           int& bananas,            // IN - number of bananas the player has
-           int& oranges,            // IN - number of oranges the player has
-           string monsterName)      // IN - monster's name input by user
+bool doorE(bool alignment,              // IN - two possible alignments of four
+                                        //      doors decided randomly at
+                                        //      beginning of each turn
+           int& bananas,                // IN - number of bananas the player has
+           int& oranges,                // IN - number of oranges the player has
+           string monsterName)          // IN - monster's name input by user
 {
     if (alignment == 0)
     {
@@ -492,11 +528,11 @@ bool doorE(bool alignment,          // IN - two possible alignments of four
  *      bananas: number of bananas the player has
  *      oranges: number of oranges the player has
  ******************************************************************************/
-bool doorS(bool alignment,          // IN - two possible alignments of four
-                                    //      doors decided randomly at beginning
-                                    //      of each turn
-           int& bananas,            // IN - number of bananas the player has
-           int& oranges)            // IN - number of oranges the player has
+bool doorS(bool alignment,              // IN - two possible alignments of four
+                                        //      doors decided randomly at
+                                        //      beginning of each turn
+           int& bananas,                // IN - number of bananas the player has
+           int& oranges)                // IN - number of oranges the player has
 {
     if (alignment == 0)
     {
@@ -534,11 +570,11 @@ bool doorS(bool alignment,          // IN - two possible alignments of four
  *      bananas: number of bananas the player has
  *      oranges: number of oranges the player has
  ******************************************************************************/
-bool doorW(bool alignment,          // IN - two possible alignments of four
-                                    //      doors decided randomly at beginning
-                                    //      of each turn
-           int& bananas,            // IN - number of bananas the player has
-           int& oranges)            // IN - number of oranges the player has
+bool doorW(bool alignment,              // IN - two possible alignments of four
+                                        //      doors decided randomly at
+                                        //      beginning of each turn
+           int& bananas,                // IN - number of bananas the player has
+           int& oranges)                // IN - number of oranges the player has
 {
     if (alignment == 0)
     {
@@ -579,6 +615,8 @@ void outputUpdate (string playerName,   // IN - player's name input by user
                    int bananas,         // IN - number of bananas the player has
                    int oranges)         // IN - number of oranges the player has
 {
+    // OUTPUT - This function will output a message notifying the player of
+    //          their current status (location, number of bananas and oranges)
     cout << playerName << ", you are in a room with 4 doors." << endl;
     cout << "You are carrying " << bananas << " bananas and " << oranges
          << " oranges." << endl;
@@ -601,14 +639,14 @@ void outputUpdate (string playerName,   // IN - player's name input by user
  *    This function will output a prompt for the user to choose a door.
  *      door: door player enters input by user
  ******************************************************************************/
-void pickDoor (char& door)  // IN - door player enters input by user
+void pickDoor (char& door)              // IN - door player enters input by user
 {
+    // PROC - Prompt the user to pick a door and re-prompt if input is invalid
     do
     {
     cout << "Pick a door to enter by typing the direction it is in (N/E/S/W): ";
     cin >> door;
     cout << endl;
-
     }
     while (door != 'N' && door != 'S' && door != 'E' && door != 'W');
 }
@@ -643,15 +681,15 @@ void pickDoor (char& door)  // IN - door player enters input by user
  *      go     : value set at the end of every round to determind when to stop
  *               the game
  ******************************************************************************/
-void matchDoor (char& door,         // IN - door player enters input by user
-                bool alignment,     // IN - two possible alignments of four
-                                    //      doors decided randomly at beginning
-                                    //      of each turn
-                int& bananas,       // IN - number of bananas the player has
-                int& oranges,       // IN - number of oranges the player has
-                string monsterName, // IN - monster's name input by user
-                bool& go)           // IN - value set at the end of every round
-                                    //      to determine when to stop the game
+void matchDoor (char& door,             // IN - door player enters input by user
+                bool alignment,         // IN - two possible alignments of four
+                                        //      doors decided randomly at
+                                        //      beginning of each turn
+                int& bananas,           // IN - number of bananas the player has
+                int& oranges,           // IN - number of oranges the player has
+                string monsterName,     // IN - monster's name input by user
+                bool& go)               // IN - value set at the end of every
+                                        //      round to determine when to stop
 {
     if (door == 'N')
     {

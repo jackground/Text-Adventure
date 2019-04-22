@@ -7,7 +7,6 @@
  ******************************************************************************/
 #include <iostream>
 #include <cstdlib>
-#include <ctime>
 using namespace std;
 /*******************************************************************************
  *
@@ -26,7 +25,6 @@ using namespace std;
  *   oranges    : number of oranges player has
  *   playerName : player's name input by user
  *   monsterName: monster's name input by user
- *
  ******************************************************************************/
 /*******************************************************************************
  * getNames
@@ -105,30 +103,30 @@ bool doorN(bool alignment,              // IN - two possible alignments of four
 
 /*******************************************************************************
  * doorE
- *   This function recieves a boolean (alignment), two integers passed by
- *   reference (bananas and oranges), and a string (monsterName). If alignment
- *   is equal to 0, the function will call genieRoom and return 1. Otherwise,
- *   the function will call monsterRoom and return 1 - returns a boolean.
- ******************************************************************************/
-bool doorE(bool alignment,              // IN - two possible alignments of four
-                                        //      doors decided randomly at
-                                        //      beginning of each turn
-           int& bananas,                // IN - number of bananas the player has
-           int& oranges,                // IN - number of oranges the player has
-           string monsterName);         // IN - monster's name input by user
-
-/*******************************************************************************
- * doorS
  *   This function recieves a boolean (alignment) and two integers passed by
  *   reference (bananas and oranges). If alignment is equal to 0, the function
  *   will call pictureRoom and return 1. Otherwise, the function will call
  *   genieRoom and return 1 - returns a boolean.
  ******************************************************************************/
-bool doorS(bool alignment,              // IN - two possible alignments of four
+bool doorE(bool alignment,              // IN - two possible alignments of four
                                         //      doors decided randomly at
                                         //      beginning of each turn
            int& bananas,                // IN - number of bananas the player has
            int& oranges);               // IN - number of oranges the player has
+
+/*******************************************************************************
+ * doorS
+ *   This function recieves a boolean (alignment), two integers passed by
+ *   reference (bananas and oranges), and a string (monsterName). If alignment
+ *   is equal to 0, the function will call genieRoom and return 1. Otherwise,
+ *   the function will call monsterRoom and return 1 - returns a boolean.
+ ******************************************************************************/
+bool doorS(bool alignment,              // IN - two possible alignments of four
+                                        //      doors decided randomly at
+                                        //      beginning of each turn
+           int& bananas,                // IN - number of bananas the player has
+           int& oranges,                // IN - number of oranges the player has
+           string monsterName);         // IN - monster's name input by user
 
 /*******************************************************************************
  * doorW
@@ -150,7 +148,6 @@ bool doorW(bool alignment,              // IN - two possible alignments of four
  *   number of bananas and oranges they have - returns nothing → This will
  *   output an update with the player name, location, and the number of bananas
  *   and oranges they have.
- *
  ******************************************************************************/
 void outputUpdate (string playerName,   // IN - player's name input by user
                    int bananas,         // IN - number of bananas the player has
@@ -162,7 +159,6 @@ void outputUpdate (string playerName,   // IN - player's name input by user
  *   input validation loop to output a prompt for the user to choose a door, and
  *   it will validate the input - returns nothing → This will output a prompt
  *   for the user to choose a door.
- *
  ******************************************************************************/
 void pickDoor (char& door);             // IN - door player enters input by user
 
@@ -173,7 +169,6 @@ void pickDoor (char& door);             // IN - door player enters input by user
  *   oranges, respectively), a string variable (monsterName) and a boolean
  *   variable passedd by reference (go). This function matches the door variable
  *   with the correct door function and calls that function - returns nothing.
- *
  ******************************************************************************/
 void matchDoor (char& door,             // IN - door player enters input by user
                 bool alignment,         // IN - two possible alignments of four
@@ -298,10 +293,10 @@ void monsterRoom(int& bananas,          // IN - number of bananas the player has
     oranges = 0;
 
     // OUTPUT - output warning and tell player what monster attaked the player
-    cout << "WATCH OUT!!" << endl;
+    cout << endl;
+    cout << "WATCH OUT!!!" << endl;
     cout << monsterName << " attacks you and steals all of your bananas and"
          << " oranges." << endl;
-    cout << endl;
 }
 
 /*******************************************************************************
@@ -330,9 +325,9 @@ void genieRoom(int& bananas,            // IN - number of bananas the player has
     oranges += 1;
 
     // OUTPUT - output what happened
-    cout << "!!POOF!!" << endl;
-    cout << "A genie pops out and grants you 2 bananas and 1 orange." << endl;
     cout << endl;
+    cout << "!!Poof!! A Genie pops out and grants you 2 bananas and 1 orange."
+         << endl;
 }
 
 /*******************************************************************************
@@ -383,8 +378,8 @@ void drawPicture()
 void pictureRoom()
 {
     // OUTPUT - output message notifying user they have found picture
-    cout << "You found a picture!" << endl;
     cout << endl;
+    cout << "You found a picture!" << endl;
 
     // drawPicture - Will output text resembling R2D2
     drawPicture();
@@ -413,9 +408,11 @@ void exitRoom(int bananas,              // IN - number of bananas the player has
     // OUTPUT - This function will output a message notifying the player they
     //          have found the exit and then outputs the player's combined and
     //          individual scores
+    cout << endl;
     cout << "You found the exit!" << endl;
-    cout << "Your score is " << bananas + oranges << " (" << bananas
+    cout << "Your score is " << bananas + oranges << "(" << bananas
          << " bananas and " << oranges << " oranges)." << endl;
+    cout << "Bye bye!!!" << endl;
 }
 
 /*******************************************************************************
@@ -468,6 +465,49 @@ bool doorN(bool alignment,              // IN - two possible alignments of four
  *
  * FUNCTION doorE
  *______________________________________________________________________________
+ * This function recieves a boolean (alignment) and two integers passed by
+ *   reference (bananas and oranges). If alignment is equal to 0, the function
+ *   will call pictureRoom and return 1. Otherwise, the function will call
+ *   genieRoom and return 1 - returns a boolean.
+ *______________________________________________________________________________
+ * PRE-CONDITIONS
+ *   The following need previously defined values:
+ *     alignment  : two possible alignments of four doors decided randomly at
+ *                  beginning of each turn
+ *     bananas    : number of bananas the player has
+ *     oranges    : number of oranges the player has
+ *
+ * POST-CONDITIONS
+ *     This function will return a boolean.
+ *      bananas: number of bananas the player has
+ *      oranges: number of oranges the player has
+ ******************************************************************************/
+bool doorE(bool alignment,              // IN - two possible alignments of four
+                                        //      doors decided randomly at
+                                        //      beginning of each turn
+           int& bananas,                // IN - number of bananas the player has
+           int& oranges)                // IN - number of oranges the player has
+{
+    if (alignment == 0)
+    {
+        // pictureRoom - Will output a message notifying the user they have
+        //               found a picture and output the "picture" to the screen.
+        pictureRoom();
+        return 1;
+    }
+    else
+    {
+        // genieRoom - Will increment bananas and oranges by 2 and 1,
+        //             respectively and output message describing what happened
+        genieRoom(bananas, oranges);
+        return 1;
+    }
+}
+
+/*******************************************************************************
+ *
+ * FUNCTION doorS
+ *______________________________________________________________________________
  * This function recieves a boolean (alignment), two integers passed by
  *   reference (bananas and oranges), and a string (monsterName). If alignment
  *   is equal to 0, the function will call genieRoom and return 1. Otherwise,
@@ -480,12 +520,13 @@ bool doorN(bool alignment,              // IN - two possible alignments of four
  *     bananas    : number of bananas the player has
  *     oranges    : number of oranges the player has
  *     monsterName: monster's name input by user
+ *
  * POST-CONDITIONS
  *     This function will return a boolean.
  *      bananas: number of bananas the player has
  *      oranges: number of oranges the player has
  ******************************************************************************/
-bool doorE(bool alignment,              // IN - two possible alignments of four
+bool doorS(bool alignment,              // IN - two possible alignments of four
                                         //      doors decided randomly at
                                         //      beginning of each turn
            int& bananas,                // IN - number of bananas the player has
@@ -510,48 +551,6 @@ bool doorE(bool alignment,              // IN - two possible alignments of four
 
 /*******************************************************************************
  *
- * FUNCTION doorS
- *______________________________________________________________________________
- * This function recieves a boolean (alignment) and two integers passed by
- *   reference (bananas and oranges). If alignment is equal to 0, the function
- *   will call pictureRoom and return 1. Otherwise, the function will call
- *   genieRoom and return 1 - returns a boolean.
- *______________________________________________________________________________
- * PRE-CONDITIONS
- *   The following need previously defined values:
- *     alignment  : two possible alignments of four doors decided randomly at
- *                  beginning of each turn
- *     bananas    : number of bananas the player has
- *     oranges    : number of oranges the player has
- * POST-CONDITIONS
- *     This function will return a boolean.
- *      bananas: number of bananas the player has
- *      oranges: number of oranges the player has
- ******************************************************************************/
-bool doorS(bool alignment,              // IN - two possible alignments of four
-                                        //      doors decided randomly at
-                                        //      beginning of each turn
-           int& bananas,                // IN - number of bananas the player has
-           int& oranges)                // IN - number of oranges the player has
-{
-    if (alignment == 0)
-    {
-        // pictureRoom - Will output a message notifying the user they have
-        //               found a picture and output the "picture" to the screen.
-        pictureRoom();
-        return 1;
-    }
-    else
-    {
-        // genieRoom - Will increment bananas and oranges by 2 and 1,
-        //             respectively and output message describing what happened
-        genieRoom(bananas, oranges);
-        return 1;
-    }
-}
-
-/*******************************************************************************
- *
  * FUNCTION doorW
  *______________________________________________________________________________
  * This function recieves a boolean (alignment) and two integers passed by
@@ -562,9 +561,10 @@ bool doorS(bool alignment,              // IN - two possible alignments of four
  * PRE-CONDITIONS
  *   The following need previously defined values:
  *     alignment: two possible alignments of four doors decided randomly at
- *                  beginning of each turn
+ *                beginning of each turn
  *     bananas  : number of bananas the player has
  *     oranges  : number of oranges the player has
+ *
  * POST-CONDITIONS
  *     This function will return a boolean.
  *      bananas: number of bananas the player has
@@ -618,9 +618,9 @@ void outputUpdate (string playerName,   // IN - player's name input by user
     // OUTPUT - This function will output a message notifying the player of
     //          their current status (location, number of bananas and oranges)
     cout << playerName << ", you are in a room with 4 doors." << endl;
+    cout << endl;
     cout << "You are carrying " << bananas << " bananas and " << oranges
          << " oranges." << endl;
-    cout << endl;
 }
 
 /*******************************************************************************
@@ -672,7 +672,6 @@ void pickDoor (char& door)              // IN - door player enters input by user
  *    go         : value set at the end of every round to determind when to stop
  *                 the game
  *
- *
  * POST-CONDITIONS
  *    This function will call another function.
  *      door   : door player enters input by user
@@ -701,13 +700,13 @@ void matchDoor (char& door,             // IN - door player enters input by user
     {
         // doorE - Will call genieRoom and return 1 if alignment is equal to 0.
         //         Otherwise, the function will call monsterRoom and return 1.
-        go = doorE(alignment, bananas, oranges, monsterName);
+        go = doorE(alignment, bananas, oranges);
     }
     else if (door == 'S')
     {
         // doorS - Will call pictureRoom and return 1 if alignment is equal to
         //         0. Otherwise, the function will call genieRoom and return 1.
-        go = doorS(alignment, bananas, oranges);
+        go = doorS(alignment, bananas, oranges, monsterName);
     }
     else if (door == 'W')
     {
